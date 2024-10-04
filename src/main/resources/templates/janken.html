@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -8,10 +8,12 @@
 </head>
 
 <body>
-  <form action="/janken" method="post">
-    <input type="text" name="name" />
-    <input type="submit" value="入室">
-  </form>
+  <h1>
+    Janken GAME!
+  </h1>
+  <div th:if="${name}">
+    Hi [[${name}]]
+  </div>
 </body>
 
 </html>
