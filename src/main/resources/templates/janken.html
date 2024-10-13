@@ -1,16 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/schema/security">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>janken</title>
+  <title>Janken</title>
 </head>
 
 <body>
+  <a href="/logout">ログアウト</a>
   <h1>
     Janken GAME!
   </h1>
+  <div th:if="${room}">
+    エントリー
+    <ul>
+      <li th:each="user : ${room.users}">[[${user}]]</li>
+    </ul>
+  </div>
   <div th:if="${name}">
     Hi [[${name}]]
   </div>
