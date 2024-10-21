@@ -4,21 +4,28 @@ import oit.is.z2453.kaizi.janken.model.Entry;
 import oit.is.z2453.kaizi.janken.model.Janken;
 
 import java.security.Principal;
+//import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import oit.is.z2453.kaizi.janken.model.User;
+import oit.is.z2453.kaizi.janken.model.UserMapper;
 
 @Controller
 public class JankenController {
 
   @Autowired
   private Entry room;
+  UserMapper userMapper;
 
   @GetMapping("/janken")
+  @Transactional
   public String janken(Principal prin, ModelMap model) {
     String loginUser = prin.getName();
     this.room.addUser(loginUser);
