@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import oit.is.z2453.kaizi.janken.model.User;
 import oit.is.z2453.kaizi.janken.model.Match;
+import oit.is.z2453.kaizi.janken.model.MatchInfo;
 import oit.is.z2453.kaizi.janken.model.UserMapper;
 import oit.is.z2453.kaizi.janken.model.MatchMapper;
+import oit.is.z2453.kaizi.janken.model.MatchInfoMapper;
 
 @Controller
 @RequestMapping("/")
@@ -27,6 +29,9 @@ public class JankenController {
 
   @Autowired
   MatchMapper matchMapper;
+
+  @Autowired
+  MatchInfoMapper matchInfoMapper;
 
   @GetMapping("janken")
   public String janken(Principal prin, ModelMap model) {
@@ -67,29 +72,17 @@ public class JankenController {
   @GetMapping("fight")
   public String fight(Principal prin, @RequestParam String hand, @RequestParam int id, ModelMap model) {
     String loginUser = prin.getName();
-    User opp = userMapper.selectById(id);
     User user = userMapper.selectByName(loginUser);
-    Match match = new Match();
-    String result = "Draw";
+    MatchInfo matchInfo = new MatchInfo();
 
-    match.setUser1(user.getId());
-    match.setUser2(id);
-    match.setUser1Hand(hand);
-    match.setUser2Hand("Gu");
-    matchMapper.insertMatches(match);
+    matchInfo.setUser1(user.getId());
+    matchInfo.setUser2(id);
+    matchInfo.setUser1Hand(hand);
+    matchInfo.setActive(true);
+    matchInfoMapper.insertMatcheInfo(matchInfo);
 
-    if (hand.equals("Pa")) {
-      result = "You Win!";
-    } else if (hand.equals("Ty")) {
-      result = "You lose";
-    }
-
-    model.addAttribute("result", result);
-    model.addAttribute("hand", hand);
-    model.addAttribute("opphand", "Gu");
-    model.addAttribute("opp", opp);
     model.addAttribute("name", loginUser);
 
-    return "match.html";
+    return "wait.html";
   }
 }

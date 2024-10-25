@@ -27,7 +27,7 @@ public class Janken {
     model.addAttribute("hand", hand);
 
     if (cpuHandNumber == 0) {
-      model.addAttribute("cpuhand", "Ty");
+      model.addAttribute("cpuhand", "Choki");
     } else if (cpuHandNumber == 1) {
       model.addAttribute("cpuhand", "Gu");
     } else if (cpuHandNumber == 2) {
