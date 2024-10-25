@@ -38,6 +38,9 @@ public class JankenController {
     String loginUser = prin.getName();
     ArrayList<User> allUsers = userMapper.selectAllUser();
     ArrayList<Match> allMatches = matchMapper.selectAllMatches();
+    ArrayList<MatchInfo> allMatchInfo = matchInfoMapper.selectAllByisActive();
+
+    model.addAttribute("allMatchInfo", allMatchInfo);
     model.addAttribute("allUsers", allUsers);
     model.addAttribute("allMatches", allMatches);
     model.addAttribute("name", loginUser);
