@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/schema/security">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Janken</title>
+</head>
+
+<body>
+  <a href="/logout">ログアウト</a>
+  <h1>
+    Match
+  </h1>
+  <h1>
+    [[${name}]] V.S. [[${opp.name}]]
+  </h1>
+  <a th:href="@{/fight(id=${opp.id},hand='Gu')}">ぐー</a>
+  <a th:href="@{/fight(id=${opp.id},hand='Ty')}">ちょき</a>
+  <a th:href="@{/fight(id=${opp.id},hand='Pa')}">ぱー</a>
+  <div th:if="${result}">
+    あなたの手 [[${hand}]] <br>
+    相手の手 [[${opphand}]] <br>
+    結果 [[${result}]]
+  </div>
+  <br>
+  <a href="/janken">戻る</a>
+</body>
+
+</html>
