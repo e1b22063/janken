@@ -9,12 +9,15 @@
 
 <body>
   <a href="/logout">ログアウト</a>
+
   <h1>
     Janken GAME!
   </h1>
+
   <div th:if="${name}">
     Hi [[${name}]]
   </div>
+
   <div th:if="${allUsers}">
     <h1>
       エントリー
@@ -23,14 +26,35 @@
       <li th:each="user : ${allUsers}"><a th:href="@{/match(id=${user.id})}"> [[${user.name}]]</a></li>
     </ul>
   </div>
-  <div th:each="match : ${allMatches}">
-    <tr>
-      <td>id:[[${match.id}]]</td>
-      <td>user1:[[${match.user1}]]</td>
-      <td>user2:[[${match.user2}]]</td>
-      <td>user1の手:[[${match.user1Hand}]]</td>
-      <td>user2の手:[[${match.user2Hand}]]</td>
-    </tr>
+
+  <div th:if="${allMatchInfo}">
+    <h1>
+      アクティブな試合
+    </h1>
+    <div th:each="matchinfo : ${allMatchInfo}">
+      <tr>
+        <td>id:[[${matchinfo.id}]]</td>
+        <td>user1:[[${matchinfo.user1}]]</td>
+        <td>user2:[[${matchinfo.user2}]]</td>
+        <td>user1の手:[[${matchinfo.user1Hand}]]</td>
+        <td>isActive:[[${matchinfo.isActive}]]</td>
+      </tr>
+    </div>
+  </div>
+
+  <div th:if="${allMatches}">
+    <h1>
+      試合結果
+    </h1>
+    <div th:each="match : ${allMatches}">
+      <tr>
+        <td>id:[[${match.id}]]</td>
+        <td>user1:[[${match.user1}]]</td>
+        <td>user2:[[${match.user2}]]</td>
+        <td>user1の手:[[${match.user1Hand}]]</td>
+        <td>user2の手:[[${match.user2Hand}]]</td>
+      </tr>
+    </div>
   </div>
 </body>
 
