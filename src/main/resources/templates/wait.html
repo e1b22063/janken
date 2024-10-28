@@ -5,6 +5,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Janken</title>
+  <script>
+    window.onload = function () {
+      var sse = new EventSource('/sse');
+      sse.onmessage = function (event) {
+        console.log("sse.onmessage")
+        console.log(event.data);
+
+        var match = JSON.parse(event.data);
+        var div1 = document.getElementById("div1");
+        var h1 = div1.appendChild(document.createElement('h1'));
+
+        h1.appendChild(document.createTextNode("結果"));
+
+        div1.appendChild(document.createTextNode("Match: id " + match.id + " user1: " + match.user1 + " user2: " + match.user2 + " user1Hand: " + match.user1Hand + " user2Hand: " + match.user2Hand));
+
+        div1.appendChild(document.createElement('br'));
+        var a1 = div1.appendChild(document.createElement('a'));
+
+        a1.href = "/janken";
+
+        a1.appendChild(document.createTextNode("戻る"));
+
+      }
+    }
+  </script>
 </head>
 
 <body>
@@ -13,6 +38,8 @@
   </h1>
   <div th:if="${name}">
     Hi [[${name}]]
+  </div>
+  <div id="div1"></div>
 </body>
 
 </html>
